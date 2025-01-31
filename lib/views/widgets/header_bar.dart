@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HeaderBar extends StatelessWidget {
+class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   const HeaderBar({super.key, required this.title});
 
@@ -11,4 +11,7 @@ class HeaderBar extends StatelessWidget {
       title: Text(title),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60.0);
 }
