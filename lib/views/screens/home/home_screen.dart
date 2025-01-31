@@ -64,15 +64,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ListView(
-              shrinkWrap: true,
-              children: widget.entries
-                  .map(
-                    (entry) => Card(
-                      child: Text(entry.name),
-                    ),
-                  )
-                  .toList(),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: widget.entries
+                    .map(
+                      (entry) => Card(
+                        child: Text(entry.name),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
           ],
         ),
