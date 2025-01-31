@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: brightness == Brightness.dark
           ? AppTheme.darkTheme
           : AppTheme.lightTheme,
-      home: const HomeScreen(title: Strings.homeTitle),
+      home: HomeScreen(title: Strings.homeTitle),
     );
   }
 }

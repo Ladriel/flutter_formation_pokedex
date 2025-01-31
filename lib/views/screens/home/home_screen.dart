@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.title});
+  HomeScreen({super.key, required this.title});
 
   final String title;
+
+  final List<PokedexEntry> entries = <PokedexEntry>[
+    PokedexEntry(name: "Bulbizarre", number: 1, sprite: "1.png"),
+    PokedexEntry(name: "Salamèche", number: 4, sprite: "4.png"),
+    PokedexEntry(name: "Carapuce", number: 7, sprite: "7.png"),
+  ];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +28,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ListView(
+              children: widget.entries
+                  .map(
+                    (entry) => Card(
+                      child: Text(entry.name),
+                    ),
+                  )
+                  .toList(),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
