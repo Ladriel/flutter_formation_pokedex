@@ -11,7 +11,9 @@ class DetailScreen extends StatelessWidget {
       appBar: HeaderBar(
         title: Strings.detailScreenTitle,
       ),
-      body: Text(Strings.detailScreenTitle),
+      body: Center(
+        child: Text(Strings.detailScreenTitle),
+      ),
     );
   }
 }
