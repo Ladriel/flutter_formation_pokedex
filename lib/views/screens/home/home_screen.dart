@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HeaderBar(
+      appBar: const HeaderBar(
         title: Strings.homeTitle,
       ),
       body: PokedexScreen(),
