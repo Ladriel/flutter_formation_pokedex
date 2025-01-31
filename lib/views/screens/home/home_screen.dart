@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
+import 'package:flutter_formation_pokedex/views/widgets/pokedex_entry_card.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required this.title});
@@ -69,9 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 children: widget.entries
                     .map(
-                      (entry) => Card(
-                        child: Text(entry.name),
-                      ),
+                      (entry) => PokedexEntryCard(entry: entry),
                     )
                     .toList(),
               ),
