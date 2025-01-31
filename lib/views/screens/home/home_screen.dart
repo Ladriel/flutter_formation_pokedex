@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ListView(
+              shrinkWrap: true,
               children: widget.entries
                   .map(
                     (entry) => Card(
