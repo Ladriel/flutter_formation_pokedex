@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_formation_pokedex/core/theme.dart';
 import 'package:flutter_formation_pokedex/views/screens/home/home_screen.dart';
 
 import 'core/strings.dart';
@@ -13,13 +15,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var brightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
+
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const HomeScreen(title: 'Flutter Demo Home Page'),
       title: Strings.appTitle,
+      theme: brightness == Brightness.dark
+          ? AppTheme.darkTheme
+          : AppTheme.lightTheme,
       home: const HomeScreen(title: Strings.homeTitle),
     );
   }
