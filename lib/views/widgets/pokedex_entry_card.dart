@@ -7,11 +7,15 @@ class PokedexEntryCard extends StatelessWidget {
     super.key,
     required this.entry,
   });
+  final double size = 120;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Text(entry.name),
+    return SizedBox(
+      height: size,
+      child: Card(
+        child: Text(entry.name),
+      ),
     );
   }
 }
