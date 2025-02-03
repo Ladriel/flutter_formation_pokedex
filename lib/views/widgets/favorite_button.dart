@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatelessWidget {
+  final bool isFavorite;
   final Function callBack;
   const FavoriteButton({
     super.key,
     required this.callBack,
+    required this.isFavorite,
   });
 
   @override
@@ -16,7 +18,9 @@ class FavoriteButton extends StatelessWidget {
         onPressed: () {
           callBack();
         },
-        icon: Icon(Icons.favorite),
+        icon: isFavorite
+            ? Icon(Icons.favorite)
+            : Icon(Icons.favorite_border_outlined),
         color: theme.colorScheme.primary,
       );
     });

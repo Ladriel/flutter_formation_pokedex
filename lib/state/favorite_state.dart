@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 //import 'package:provider/provider.dart';
 
 class FavoritesState with ChangeNotifier {
@@ -12,7 +13,28 @@ class FavoritesState with ChangeNotifier {
   }
 
   addFavorite(String name) {
-    if (!favorites.contains(name)) _favorites.add(name);
-    notifyListeners();
+    if (!isFavorite(name)) {
+      _favorites.add(name);
+      notifyListeners();
+    }
+  }
+
+  removeFavorite(String value) {
+    if (isFavorite(value)) {
+      _favorites.remove(value);
+      notifyListeners();
+    }
+  }
+
+  isFavorite(String value) {
+    return _favorites.contains(value);
+  }
+
+  void addOrRemoveFavorite(String name) {
+    if (isFavorite(name)) {
+      removeFavorite(name);
+    } else {
+      addFavorite(name);
+    }
   }
 }

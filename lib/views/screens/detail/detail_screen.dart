@@ -12,6 +12,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final detailState = Provider.of<PokemonDetailState>(context);
+    final favoriteState = Provider.of<FavoritesState>(context);
     final detail = detailState.detail;
     return Scaffold(
       appBar: const HeaderBar(
@@ -27,11 +28,12 @@ class DetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(detail.name),
-                          FavoriteButton(callBack: () {
-                            // could use Consumer
-                            Provider.of<FavoritesState>(context, listen: false)
-                                .addFavorite(detail.name);
-                          }),
+                          FavoriteButton(
+                            callBack: () {
+                              favoriteState.addOrRemoveFavorite(detail.name);
+                            },
+                            isFavorite: favoriteState.isFavorite(detail.name),
+                          ),
                         ],
                       )
                     : Text(Strings.empty),
