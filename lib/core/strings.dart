@@ -5,4 +5,5 @@ class Strings {
   static const favoritesScreenTitle = "Favs";
   static const favoriteTab = "Favorites";
   static const pokedexTab = "Pokedex";
+  static const empty = "Aucune donnée !";
 }
