@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
-import 'package:flutter_formation_pokedex/state/favorite_state.dart';
-import 'package:flutter_formation_pokedex/state/pokedex_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/favorites/favorites_screen.dart';
 import 'package:flutter_formation_pokedex/views/screens/pokedex/pokedex_screen.dart';
 import 'package:flutter_formation_pokedex/views/widgets/bottom_bar.dart';
 import 'package:flutter_formation_pokedex/views/widgets/header_bar.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required this.title});
@@ -32,35 +29,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<PokedexState>(
-          create: (_) => PokedexState(),
+    return Scaffold(
+      appBar: HeaderBar(
+        title: widget.tabs[currentIndex].label ?? "Default",
+      ),
+      body: DefaultTabController(
+        length: widget.screens.length,
+        child: IndexedStack(
+          index: currentIndex,
+          children: widget.screens,
         ),
-        ChangeNotifierProvider<FavoritesState>(
-          create: (_) => FavoritesState(),
-        ),
-      ],
-      builder: (context, _) => Scaffold(
-        appBar: HeaderBar(
-          title: widget.tabs[currentIndex].label ?? "Default",
-        ),
-        body: DefaultTabController(
-          length: widget.screens.length,
-          child: IndexedStack(
-            index: currentIndex,
-            children: widget.screens,
-          ),
-        ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          tabs: widget.tabs,
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
+      ),
+      bottomNavigationBar: BottomBar(
+        currentIndex: currentIndex,
+        tabs: widget.tabs,
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
       ),
     );
   }

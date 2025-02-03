@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_formation_pokedex/core/theme.dart';
+import 'package:flutter_formation_pokedex/state/favorite_state.dart';
+import 'package:flutter_formation_pokedex/state/pokedex_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'core/strings.dart';
 
@@ -18,12 +21,22 @@ class MyApp extends StatelessWidget {
     var brightness =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
-    return MaterialApp(
-      title: Strings.appTitle,
-      theme: brightness == Brightness.dark
-          ? AppTheme.darkTheme
-          : AppTheme.lightTheme,
-      home: HomeScreen(title: Strings.homeTitle),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PokedexState>(
+          create: (_) => PokedexState(),
+        ),
+        ChangeNotifierProvider<FavoritesState>(
+          create: (_) => FavoritesState(),
+        ),
+      ],
+      builder: (context, _) => MaterialApp(
+        title: Strings.appTitle,
+        theme: brightness == Brightness.dark
+            ? AppTheme.darkTheme
+            : AppTheme.lightTheme,
+        home: HomeScreen(title: Strings.homeTitle),
+      ),
     );
   }
 }
