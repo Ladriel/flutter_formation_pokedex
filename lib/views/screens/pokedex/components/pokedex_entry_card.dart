@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
+import 'package:flutter_formation_pokedex/state/favorite_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/detail/detail_screen.dart';
 import 'package:flutter_formation_pokedex/views/widgets/favorite_button.dart';
+import 'package:provider/provider.dart';
 
 class PokedexEntryCard extends StatelessWidget {
   final PokedexEntry entry;
-  final Function(String) onFavTap;
   const PokedexEntryCard({
     super.key,
     required this.entry,
-    required this.onFavTap,
   });
   final double size = 120;
 
@@ -28,7 +28,9 @@ class PokedexEntryCard extends StatelessWidget {
           child: Row(
             children: [
               FavoriteButton(callBack: () {
-                onFavTap(entry.name);
+                // could use Consumer
+                Provider.of<FavoritesState>(context, listen: false)
+                    .addFavorite(entry.name);
               }),
               Text(entry.name),
             ],
