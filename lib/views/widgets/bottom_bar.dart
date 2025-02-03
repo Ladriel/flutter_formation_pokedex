@@ -12,10 +12,15 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BottomNavigationBar(
       items: tabs,
       onTap: onTap,
       currentIndex: currentIndex,
+      backgroundColor: theme.colorScheme.secondaryContainer,
+      selectedItemColor: theme.colorScheme.onSecondaryContainer,
+      selectedFontSize: 16,
+      unselectedItemColor: theme.colorScheme.onSecondaryContainer.withAlpha(75),
     );
   }
 }
