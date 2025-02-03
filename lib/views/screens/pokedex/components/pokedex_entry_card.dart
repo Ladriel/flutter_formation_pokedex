@@ -31,16 +31,7 @@ class PokedexEntryCard extends StatelessWidget {
       child: SizedBox(
         height: size,
         child: Card(
-          child: Row(
-            children: [
-              FavoriteButton(callBack: () {
-                // could use Consumer
-                Provider.of<FavoritesState>(context, listen: false)
-                    .addFavorite(entry.name);
-              }),
-              Text(entry.name),
-            ],
-          ),
+          child: Text(entry.name),
         ),
       ),
     );
