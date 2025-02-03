@@ -9,10 +9,6 @@ class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required this.title});
 
   final String title;
-  final List<Widget> homeScreens = [
-    PokedexScreen(),
-    FavoritesScreen(),
-  ];
   final tabs = [
     BottomNavigationBarItem(icon: Icon(Icons.list), label: Strings.pokedexTab),
     BottomNavigationBarItem(
@@ -25,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+  final List<String> favorites = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +30,23 @@ class _HomeScreenState extends State<HomeScreen> {
         title: widget.tabs[currentIndex].label ?? "Default",
       ),
       body: DefaultTabController(
-        length: widget.homeScreens.length,
+        length: 2,
         child: IndexedStack(
           index: currentIndex,
-          children: widget.homeScreens,
+          children: [
+            PokedexScreen(
+              didClickFavEntry: (name) {
+                setState(
+                  () {
+                    favorites.add(name);
+                  },
+                );
+              },
+            ),
+            FavoritesScreen(
+              favorites: favorites,
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomBar(

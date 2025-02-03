@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
-import 'package:flutter_formation_pokedex/views/widgets/header_bar.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({super.key});
+  final List<String> favorites;
+  const FavoritesScreen({super.key, required this.favorites});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(Strings.favoritesScreenTitle),
+      child: favorites.isEmpty
+          ? Text(Strings.empty)
+          : Column(
+              children: favorites
+                  .map(
+                    (fav) => Text(fav),
+                  )
+                  .toList(),
+            ),
     );
   }
 }
