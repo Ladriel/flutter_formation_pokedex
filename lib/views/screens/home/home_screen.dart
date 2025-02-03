@@ -34,18 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: IndexedStack(
           index: currentIndex,
           children: [
-            PokedexScreen(
-              didClickFavEntry: (name) {
-                setState(
-                  () {
-                    favorites.add(name);
-                  },
-                );
-              },
-            ),
-            FavoritesScreen(
-              favorites: favorites,
-            ),
+            PokedexScreen(),
+            FavoritesScreen(),
           ],
         ),
       ),

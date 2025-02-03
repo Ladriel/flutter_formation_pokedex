@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_formation_pokedex/core/exceptions.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/data/poke_api.dart';
@@ -7,8 +6,9 @@ import 'package:flutter_formation_pokedex/data/repository.dart';
 import 'package:flutter_formation_pokedex/views/screens/pokedex/components/pokedex_entry_card.dart';
 
 class PokedexScreen extends StatefulWidget {
-  const PokedexScreen({super.key, required this.didClickFavEntry});
-  final Function(String) didClickFavEntry;
+  const PokedexScreen({
+    super.key,
+  });
 
   @override
   State<PokedexScreen> createState() => _PokedexScreenState();
@@ -64,7 +64,6 @@ class _PokedexScreenState extends State<PokedexScreen> {
                                 .map(
                                   (entry) => PokedexEntryCard(
                                     entry: entry,
-                                    onFavTap: widget.didClickFavEntry,
                                   ),
                                 )
                                 .toList(),
