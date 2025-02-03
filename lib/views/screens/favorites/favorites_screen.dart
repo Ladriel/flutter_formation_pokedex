@@ -18,7 +18,7 @@ class FavoritesScreen extends StatelessWidget {
             : Column(
                 children: favoritesState.favorites
                     .map(
-                      (fav) => Text(fav),
+                      (fav) => Text(fav.name),
                     )
                     .toList(),
               ),

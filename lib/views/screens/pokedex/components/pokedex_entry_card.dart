@@ -21,7 +21,9 @@ class PokedexEntryCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
               create: (_) => PokemonDetailState(entry),
-              child: DetailScreen(),
+              child: DetailScreen(
+                entry: entry,
+              ),
             ),
           ),
         );

@@ -3,38 +3,38 @@ import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 //import 'package:provider/provider.dart';
 
 class FavoritesState with ChangeNotifier {
-  List<String> _favorites = [];
+  List<PokedexEntry> _favorites = [];
 
-  List<String> get favorites => _favorites;
+  List<PokedexEntry> get favorites => _favorites;
 
-  set favorites(List<String> value) {
+  set favorites(List<PokedexEntry> value) {
     _favorites = value;
     notifyListeners();
   }
 
-  addFavorite(String name) {
-    if (!isFavorite(name)) {
-      _favorites.add(name);
+  addFavorite(PokedexEntry value) {
+    if (!isFavorite(value)) {
+      _favorites.add(value);
       notifyListeners();
     }
   }
 
-  removeFavorite(String value) {
+  removeFavorite(PokedexEntry value) {
     if (isFavorite(value)) {
       _favorites.remove(value);
       notifyListeners();
     }
   }
 
-  isFavorite(String value) {
+  isFavorite(PokedexEntry value) {
     return _favorites.contains(value);
   }
 
-  void addOrRemoveFavorite(String name) {
-    if (isFavorite(name)) {
-      removeFavorite(name);
+  void addOrRemoveFavorite(PokedexEntry value) {
+    if (isFavorite(value)) {
+      removeFavorite(value);
     } else {
-      addFavorite(name);
+      addFavorite(value);
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
+import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/state/detail_state.dart';
 import 'package:flutter_formation_pokedex/state/favorite_state.dart';
 import 'package:flutter_formation_pokedex/views/widgets/favorite_button.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_formation_pokedex/views/widgets/header_bar.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  final PokedexEntry entry;
+  const DetailScreen({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,9 @@ class DetailScreen extends StatelessWidget {
                           Text(detail.name),
                           FavoriteButton(
                             callBack: () {
-                              favoriteState.addOrRemoveFavorite(detail.name);
+                              favoriteState.addOrRemoveFavorite(entry);
                             },
-                            isFavorite: favoriteState.isFavorite(detail.name),
+                            isFavorite: favoriteState.isFavorite(entry),
                           ),
                         ],
                       )
