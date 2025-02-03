@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
 import 'package:flutter_formation_pokedex/state/favorite_state.dart';
+import 'package:flutter_formation_pokedex/state/pokedex_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/favorites/favorites_screen.dart';
 import 'package:flutter_formation_pokedex/views/screens/pokedex/pokedex_screen.dart';
 import 'package:flutter_formation_pokedex/views/widgets/bottom_bar.dart';
@@ -31,9 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FavoritesState(),
-      child: Scaffold(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PokedexState>(
+          create: (_) => PokedexState(),
+        ),
+        ChangeNotifierProvider<FavoritesState>(
+          create: (_) => FavoritesState(),
+        ),
+      ],
+      builder: (context, _) => Scaffold(
         appBar: HeaderBar(
           title: widget.tabs[currentIndex].label ?? "Default",
         ),
