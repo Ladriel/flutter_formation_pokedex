@@ -1,58 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
-import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
-import 'package:flutter_formation_pokedex/data/poke_api.dart';
-import 'package:flutter_formation_pokedex/data/repository.dart';
+import 'package:flutter_formation_pokedex/state/pokedex_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/pokedex/components/pokedex_entry_card.dart';
+import 'package:provider/provider.dart';
 
-class PokedexScreen extends StatefulWidget {
+class PokedexScreen extends StatelessWidget {
   const PokedexScreen({
     super.key,
   });
 
   @override
-  State<PokedexScreen> createState() => _PokedexScreenState();
-}
-
-class _PokedexScreenState extends State<PokedexScreen> {
-  bool loading = true;
-  String? error;
-  List<PokedexEntry> entries = <PokedexEntry>[];
-
-  @override
-  void initState() {
-    super.initState();
-    Repository repository = Repository(pokemonAPIClient: PokeAPIClient());
-    try {
-      //throw NetworkException(code: 500, message: "Kaboom");
-      repository.getPokedexEntries().then(
-            (value) => setState(
-              () {
-                loading = false;
-                entries = value;
-                // entries = [];
-              },
-            ),
-          );
-    } catch (e) {
-      print("error $e");
-      setState(
-        () {
-          loading = false;
-          error = e.toString();
-        },
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final pokedexState = Provider.of<PokedexState>(context);
     return Center(
-      child: loading
+      child: pokedexState.loading
           ? CircularProgressIndicator()
-          : error != null
-              ? Text(error ?? "Whoops")
-              : entries.isEmpty
+          : pokedexState.error != null
+              ? Text(pokedexState.error ?? "Whoops")
+              : pokedexState.entries.isEmpty
                   ? Text(Strings.empty)
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +25,7 @@ class _PokedexScreenState extends State<PokedexScreen> {
                         Expanded(
                           child: ListView(
                             shrinkWrap: true,
-                            children: entries
+                            children: pokedexState.entries
                                 .map(
                                   (entry) => PokedexEntryCard(
                                     entry: entry,
