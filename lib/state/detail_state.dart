@@ -17,8 +17,7 @@ class PokemonDetailState with ChangeNotifier {
 
   fetchPokedexEntries() async {
     try {
-      detail = await Repository(pokemonAPIClient: PokeAPIClient())
-          .getPokemonDetail(entry.name);
+      detail = await Repository().getPokemonDetail(entry.name);
     } catch (e) {
       print("error $e");
       error = e.toString();
