@@ -1,3 +1,4 @@
+import 'package:flutter_formation_pokedex/data/models/pokemon_detail.dart';
 import 'package:flutter_formation_pokedex/data/poke_api.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 
@@ -14,5 +15,10 @@ class Repository {
         entriesDatas.map((entry) => PokedexEntry.fromMap(entry)).toList();
     print("entries $result");
     return result;
+  }
+
+  Future<PokemonDetail> getPokemonDetail(String name) async {
+    final pokemonData = await pokemonAPIClient.fetchPokemonDetail(name);
+    return PokemonDetail.fromMap(pokemonData);
   }
 }
