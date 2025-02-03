@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/core/strings.dart';
 import 'package:flutter_formation_pokedex/views/screens/favorites/favorites_screen.dart';
 import 'package:flutter_formation_pokedex/views/screens/pokedex/pokedex_screen.dart';
+import 'package:flutter_formation_pokedex/views/widgets/bottom_bar.dart';
 import 'package:flutter_formation_pokedex/views/widgets/header_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,8 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: widget.homeScreens,
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: widget.tabs,
+      bottomNavigationBar: BottomBar(
+        currentIndex: currentIndex,
+        tabs: widget.tabs,
         onTap: (index) {
           setState(() {
             currentIndex = index;
