@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/state/detail_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/detail/detail_screen.dart';
+import 'package:flutter_formation_pokedex/views/widgets/image_with_placeholder.dart';
 import 'package:provider/provider.dart';
 
 class PokedexEntryCard extends StatelessWidget {
@@ -58,21 +59,8 @@ class PokedexEntryCard extends StatelessWidget {
           Positioned.fill(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                entry.sprite,
-                fit: BoxFit.contain,
-                frameBuilder: (BuildContext context, Widget child, int? frame,
-                    bool wasSynchronouslyLoaded) {
-                  return frame != null
-                      ? child
-                      : Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Image.asset(
-                            'assets/pokeball.png',
-                            fit: BoxFit.contain,
-                          ),
-                        );
-                },
+              child: ImageWithPlaceholder(
+                url: entry.sprite,
               ),
             ),
           ),

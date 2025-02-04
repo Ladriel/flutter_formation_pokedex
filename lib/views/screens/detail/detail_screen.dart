@@ -3,6 +3,7 @@ import 'package:flutter_formation_pokedex/core/strings.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/state/detail_state.dart';
 import 'package:flutter_formation_pokedex/state/favorite_state.dart';
+import 'package:flutter_formation_pokedex/views/screens/detail/components/detail_widget.dart';
 import 'package:flutter_formation_pokedex/views/widgets/favorite_button.dart';
 import 'package:flutter_formation_pokedex/views/widgets/header_bar.dart';
 import 'package:provider/provider.dart';
@@ -26,19 +27,14 @@ class DetailScreen extends StatelessWidget {
             : detailState.error != null
                 ? Text(detailState.error ?? "Whoops")
                 : detail != null
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(detail.name),
-                          FavoriteButton(
-                            callBack: () {
-                              favoriteState.addOrRemoveFavorite(entry);
-                            },
-                            isFavorite: favoriteState.isFavorite(entry),
-                          ),
-                        ],
-                      )
+                    ? DetailWidget(detail: detail)
                     : Text(Strings.empty),
+      ),
+      floatingActionButton: FavoriteButton(
+        callBack: () {
+          favoriteState.addOrRemoveFavorite(entry);
+        },
+        isFavorite: favoriteState.isFavorite(entry),
       ),
     );
   }
