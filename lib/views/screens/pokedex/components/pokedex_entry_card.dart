@@ -5,31 +5,34 @@ import 'package:flutter_formation_pokedex/views/screens/detail/detail_screen.dar
 import 'package:provider/provider.dart';
 
 class PokedexEntryCard extends StatelessWidget {
+  final double size;
   final PokedexEntry entry;
+
   const PokedexEntryCard({
     super.key,
     required this.entry,
+    required this.size,
   });
-  final double size = 120;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (_) => PokemonDetailState(entry),
-              child: DetailScreen(
-                entry: entry,
+    return SizedBox(
+      height: size,
+      width: size,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider(
+                create: (_) => PokemonDetailState(entry),
+                child: DetailScreen(
+                  entry: entry,
+                ),
               ),
             ),
-          ),
-        );
-      },
-      child: SizedBox(
-        height: size,
+          );
+        },
         child: Card(
           child: Text(entry.name),
         ),
