@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/views/widgets/name_widget.dart';
+import 'package:flutter_formation_pokedex/views/widgets/shake_animation_widget.dart';
 
 class FavoriteCard extends StatelessWidget {
   final PokedexEntry entry;
@@ -22,10 +23,16 @@ class FavoriteCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/${entry.number}.png",
-                    fit: BoxFit.contain,
-                    alignment: Alignment.center,
+                  ShakeAnimationWidget(
+                    key: Key("anim_${entry.number}_$healthPercent"),
+                    duration: Duration(
+                        milliseconds: (1050 - (1000 * healthPercent))
+                            .toInt()), // a lower health == a slower animation
+                    child: Image.network(
+                      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/${entry.number}.png",
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    ),
                   ),
                   Expanded(
                     child: Padding(
