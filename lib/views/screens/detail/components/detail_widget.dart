@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation_pokedex/data/models/pokemon_detail.dart';
 import 'package:flutter_formation_pokedex/views/widgets/image_with_placeholder.dart';
+import 'package:flutter_formation_pokedex/views/widgets/name_widget.dart';
 
 class DetailWidget extends StatelessWidget {
   final PokemonDetail detail;
@@ -16,11 +17,9 @@ class DetailWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Text(
-              "${detail.name[0].toUpperCase()}${detail.name.substring(1)}",
-              style: TextStyle(
-                fontSize: 24,
-              ),
+            child: NameWidget(
+              name: detail.name,
+              fontSize: 24,
             ),
           ),
           Padding(

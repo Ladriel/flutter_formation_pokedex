@@ -3,6 +3,7 @@ import 'package:flutter_formation_pokedex/data/models/pokedex_entry.dart';
 import 'package:flutter_formation_pokedex/state/detail_state.dart';
 import 'package:flutter_formation_pokedex/views/screens/detail/detail_screen.dart';
 import 'package:flutter_formation_pokedex/views/widgets/image_with_placeholder.dart';
+import 'package:flutter_formation_pokedex/views/widgets/name_widget.dart';
 import 'package:provider/provider.dart';
 
 class PokedexEntryCard extends StatelessWidget {
@@ -42,8 +43,6 @@ class PokedexEntryCard extends StatelessWidget {
   }
 
   _buildCard(BuildContext context, PokedexEntry entry) {
-    ThemeData theme = Theme.of(context);
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -67,13 +66,7 @@ class PokedexEntryCard extends StatelessWidget {
           Positioned(
             bottom: 1,
             right: 1,
-            child: Text(
-              "${entry.name[0].toUpperCase()}${entry.name.substring(1)}",
-              style: TextStyle(
-                fontSize: 15,
-                color: theme.colorScheme.onSurface,
-              ),
-            ),
+            child: NameWidget(name: entry.name, fontSize: 15),
           ),
         ],
       ),
